@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+imaFan
+{% endblock %}
+
+{% block head %}  
+{% endblock %}
+
+{% block facebook_script %}
+auth();
+
+FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;
+        FB.api('/me', function(resp) {
+            $("#content").append('<img src="http://graph.facebook.com/'+resp['username']+'/picture?type=large" />');
+            $("#content").append('<a href="'+resp['id']+'">'+resp['name']+'</a>');
+            });
+        }  
+});
+{% endblock %}
+
+{% block content %}
+<div id="content">
+</div>
+
+{% endblock %}

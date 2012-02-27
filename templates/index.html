@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+  imaFan
+{% endblock %}
+
+{% block head %}  
+{% endblock %}
+
+{% block facebook_script %}
+  FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;
+        location.href = "{{ config['index'] }}" + '/' + uid
+      }  
+  });
+
+{% endblock %}
+
+{% block content %}
+
+<h1>imaFan</h1>
+<div class="fb-login-button">Login with Facebook</div>
+<div id="content">
+</div>
+
+{% endblock %}

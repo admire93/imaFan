@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>
+      {% block title %}
+      {% endblock  %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" />
+    <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+    <script type = "text/javascript" href="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    {% block head %}
+    {% endblock  %}
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+        function auth() {
+            FB.getLoginStatus(function(response) {
+                if (response.status !== 'connected') {
+                location.href = "{{ config['index'] }}";
+                }         
+            });
+        }
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '339932072707609',
+            status     : true, 
+            cookie     : true,
+            xfbml      : true,
+            oauth      : true,
+
+          });
+        
+         {% block facebook_script %}
+         {% endblock %}
+       };
+          (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+
+    </script>
+    
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</a>
+<a class="brand" href="/search">imaFan</a>
+<div class="nav-collapse">
+<ul class="nav">
+  <li><a href="/me">me</a></li>
+  <li><a href="/search">search</a></li>
+</ul>
+<form class="navbar-search pull-right">
+  <input type="text" class="search-query span3" placeholder="search" style="height: 30px" />
+</form>
+</div>
+</div>
+</div>
+</div>
+
+
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
