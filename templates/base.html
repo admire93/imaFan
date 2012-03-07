@@ -5,6 +5,8 @@
       {% endblock  %}
     </title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" />
+    <link rel="stylesheet/less" type="text/css" href="{{ url_for('static', filename='css/base.less') }}" />
+    <script type = "text/javascript" src="{{ url_for('static', filename='js/less-1.2.2.js') }}"></script>
     <script type = "text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
     <script type = "text/javascript" href="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
     {% block head %}
@@ -64,8 +66,9 @@
 </div>
 </div>
 
-
+<div id="content">
     {% block content %}
     {% endblock %}
+</div>
   </body>
 </html>

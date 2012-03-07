@@ -8,22 +8,25 @@ imaFan
 {% endblock %}
 
 {% block facebook_script %}
+
 auth();
 
 FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
         var uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;
+        console.log(accessToken);
         FB.api('/me', function(resp) {
-            $("#content").append('<img src="http://graph.facebook.com/'+resp['username']+'/picture?type=large" />');
-            $("#content").append('<a href="'+resp['id']+'">'+resp['name']+'</a>');
-            });
+            $("#profile").append('<img src="http://graph.facebook.com/'+resp['username']+'/picture?type=large" />');
+            $("#profile").append('<a href="'+resp['id']+'"><h2>'+resp['name']+'</h2></a>');
+                          
+        });
         }  
 });
 {% endblock %}
-
 {% block content %}
-<div id="content">
+<div id="profile">
 </div>
-
+<div id="fan-page">
+</div>
 {% endblock %}
